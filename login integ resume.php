@@ -117,7 +117,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		a { color: var(--accent); text-decoration: none; }
 		a:hover { text-decoration: underline; }
 		.footer { margin-top: 36px; font-size: .9rem; color: var(--muted); }
-		/* Login styles (match act2) */
 		.login-container { max-width: 560px; margin: 48px auto; padding: 0 16px; }
 		.login-title { margin: 0 0 16px; font-size: 1.5rem; }
 		.sub { margin: 0 0 20px; color: var(--muted); }
@@ -130,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		.message { margin: 12px 0 0; padding: 10px 12px; border-radius: 8px; font-weight: 600; }
 		.message.success { color: #166534; background: #dcfce7; border: 1px solid #86efac; }
 		.message.error { color: #b91c1c; background: #fee2e2; border: 1px solid #fecaca; }
-		/* Logout link */
 		.logout-link { margin-left: auto; padding: 8px 12px; border:1px solid #e5e7eb; border-radius: 8px; color: var(--fg); text-decoration:none; }
 		.logout-link:hover { background:#f8fafc; }
 	</style>
@@ -175,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				</div>
 			</div>
 			<?php else: ?>
-			<!-- No welcome card; header shows Logout -->
+			<!-- Logout -->
 			<?php endif; ?>
 
 			<?php if ($isAuthenticated): ?>
