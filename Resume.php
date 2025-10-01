@@ -61,27 +61,99 @@ function h(string $value): string {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title><?php echo h($resume['name']); ?> — Resume</title>
 	<style>
-		:root { --fg:#1c1c1c; --muted:#5b5b5b; --accent:#2563eb; --bg:#ffffff; --chip:#f1f5f9; }
+		:root { 
+			--fg:#1c1c1c; 
+			--muted:#5b5b5b; 
+			--accent:#2563eb; --bg:#ffffff; 
+			--chip:#f1f5f9; 
+		}
 		* { box-sizing: border-box; }
-		body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: var(--fg); }
-		.container { max-width: 960px; margin: 40px auto; padding: 0 24px 48px; }
-		header { border-bottom: 2px solid #eee; padding-bottom: 16px; margin-bottom: 24px; }
-		h1 { margin: 0; font-size: 2rem; }
-		.subtitle { color: var(--muted); margin-top: 4px; }
-		.section { margin-top: 28px; }
-		.section h2 { font-size: 1.1rem; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
-		.grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+		body { 
+			margin:0; 
+			font-family: 
+			system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+			background: var(--bg); 
+			color: var(--fg); 
+		}
+		.container { 
+			max-width: 960px; 
+			margin: 40px auto; 
+			padding: 0 24px 48px; 
+		}
+
+		header { 
+			display:flex; 
+			align-items:center; 
+			justify-content: space-between; 
+			gap: 12px; border-bottom: 
+			2px solid #eee; 
+			padding-bottom: 16px; 
+			margin-bottom: 24px; 
+		}
+		h1 { 
+			margin: 0; f
+			ont-size: 2rem; 
+		}
+		.subtitle { 
+			color: var(--muted); 
+			margin-top: 4px; 
+		}
+		.section { 
+			margin-top: 
+			28px; 
+		}
+		.section h2 { 
+			font-size: 1.1rem; 
+			letter-spacing: .04em; 
+			text-transform: uppercase; 
+			color: var(--muted); margin: 0 0 12px; 
+		}
+		.grid { 
+			display: grid; 
+			grid-template-columns: 1fr; 
+			gap: 12px; 
+		}
+
 		@media (min-width: 720px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
-		.kv { display:flex; gap:8px; align-items: baseline; }
-		.kv .k { min-width: 120px; color: var(--muted); }
-		.chips { display:flex; flex-wrap: wrap; gap: 8px; }
-		.chip { background: var(--chip); padding: 6px 10px; border-radius: 999px; font-size: 0.9rem; }
-		.card { border:1px solid #eee; border-radius: 10px; padding: 14px; }
-		.card h3 { margin: 0 0 6px; font-size: 1.05rem; }
-		.card p { margin: 6px 0 12px; color: var(--muted); }
+		.kv { 
+			display:flex; 
+			gap:8px; align-items: baseline; 
+		}
+		.kv .k { 
+			min-width: 120px; 
+			color: var(--muted); 
+		}
+		.chips { 
+			display:flex; 
+			flex-wrap: wrap; 
+			gap: 8px; 
+		}
+		.chip { 
+			background: var(--chip); 
+			padding: 6px 10px; 
+			border-radius: 999px; 
+			font-size: 0.9rem; 
+		}
+		.card { 
+			border:1px solid #eee; 
+			border-radius: 10px; 
+			padding: 14px; 
+		}
+		.card h3 { 
+			margin: 0 0 6px; 
+			font-size: 1.05rem; 
+		}
+		.card p { 
+			margin: 6px 0 12px; 
+			color: var(--muted); 
+		}
+
 		a { color: var(--accent); text-decoration: none; }
 		a:hover { text-decoration: underline; }
-		.footer { margin-top: 36px; font-size: .9rem; color: var(--muted); }
+		.footer { 
+			margin-top: 36px; 
+			font-size: .9rem; color: var(--muted); 
+		}
 	</style>
 </head>
 <body>
