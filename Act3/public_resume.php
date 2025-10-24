@@ -4,19 +4,16 @@ require_once "config.php";
 
 function h($v) { return htmlspecialchars($v, ENT_QUOTES, 'UTF-8'); }
 
-// Login functionality
 $message = '';
 $messageClass = '';
 $isAuthenticated = isset($_SESSION['user_id']);
 
-// Handle logout
 if (isset($_GET['logout'])) {
     session_destroy();
     header("Location: public_resume.php");
     exit;
 }
 
-// Handle login
 if (isset($_POST['action']) && $_POST['action'] === 'login') {
     $username = trim($_POST['username'] ?? '');
     $password = trim($_POST['password'] ?? '');
@@ -26,7 +23,6 @@ if (isset($_POST['action']) && $_POST['action'] === 'login') {
         $stmt->execute(['u' => $username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // ✅ Use password_verify() for hashed passwords
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
@@ -43,17 +39,14 @@ if (isset($_POST['action']) && $_POST['action'] === 'login') {
     }
 }
 
-// Handle resume update
 if ($isAuthenticated && isset($_POST['action']) && $_POST['action'] === 'update') {
     $uid = $_SESSION['user_id'];
-    
-    // Update personal info
+   
     $update = $pdo->prepare("UPDATE personal_info SET full_name=?, title=?, email=?, phone=?, location=?, github_url=? WHERE user_id=?");
     $update->execute([
         $_POST['name'], $_POST['title'], $_POST['email'], $_POST['phone'], $_POST['location'], $_POST['github'], $uid
     ]);
 
-    // Replace skills
     $pdo->prepare("DELETE FROM skills WHERE user_id=?")->execute([$uid]);
     if (!empty($_POST['skill_categories'])) {
         foreach ($_POST['skill_categories'] as $i => $cat) {
@@ -67,7 +60,6 @@ if ($isAuthenticated && isset($_POST['action']) && $_POST['action'] === 'update'
         }
     }
 
-    // Replace education
     $pdo->prepare("DELETE FROM education WHERE user_id=?")->execute([$uid]);
     if (!empty($_POST['edu_level'])) {
         foreach ($_POST['edu_level'] as $i => $lvl) {
@@ -76,7 +68,6 @@ if ($isAuthenticated && isset($_POST['action']) && $_POST['action'] === 'update'
         }
     }
 
-    // Replace projects
     $pdo->prepare("DELETE FROM projects WHERE user_id=?")->execute([$uid]);
     if (!empty($_POST['proj_name'])) {
         foreach ($_POST['proj_name'] as $i => $nm) {
@@ -98,8 +89,7 @@ if ($isAuthenticated && isset($_POST['action']) && $_POST['action'] === 'update'
     exit;
 }
 
-// Get resume data
-$id = $_GET['id'] ?? 1; // Default to user ID 1 if not specified
+$id = $_GET['id'] ?? 1;
 $stmt = $pdo->prepare("SELECT * FROM personal_info WHERE user_id = ?");
 $stmt->execute([$id]);
 $p = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -108,7 +98,6 @@ if (!$p) {
     die("Resume not found."); 
 }
 
-// Get skills
 $skillsQ = $pdo->prepare("SELECT category, skill_name FROM skills WHERE user_id=?");
 $skillsQ->execute([$id]);
 $skills = [];
@@ -116,7 +105,6 @@ while ($r = $skillsQ->fetch(PDO::FETCH_ASSOC)) {
     $skills[$r['category']][] = $r['skill_name'];
 }
 
-// Get education
 $edu = $pdo->prepare("SELECT * FROM education WHERE user_id=? ORDER BY display_order");
 $edu->execute([$id]);
 $eduList = $edu->fetchAll(PDO::FETCH_ASSOC);
