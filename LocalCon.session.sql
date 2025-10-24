@@ -1,0 +1,1 @@
+-- just a test connection part for vscodesql extension
